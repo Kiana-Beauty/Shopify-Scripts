@@ -1,0 +1,18 @@
+{% layout none %}<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:s="http://jadedpixel.com/-/spec/shopify" xml:lang="en-US">
+<id>{{ canonical_url }}?view=atom</id>
+<link rel="alternate" type="text/html" href="{{ canonical.url }}"/>
+<link rel="self" type="application/atom+xml" href="{{ canonical_url }}?view=atom"/>
+<title>Kiana Beauty</title>
+<updated>{{ 'now' | date: "%Y-%m-%dT%H:%M:%S+11:00" }}</updated>
+<author>
+    <name>{{ shop.name }}</name>
+</author>{% paginate collection.products by settings.pagination_limit %}
+{% for product in collection.products limit: settings.pagination_limit %}{% include 'collection-atom-loop' with collection.handle %}{% endfor %}
+{% endpaginate %}
+</feed>
+
+{% comment %}
+This uses a particular canonical URL style for /collections/brand-name rather than the default canonical URL for products within Shopify.
+If you do not have collections for every vendors and you do not have a modified version of the canonical, consider using collection-default.atom instead.
+{% endcomment %}
