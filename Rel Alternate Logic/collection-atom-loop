@@ -1,0 +1,20 @@
+<entry>
+  <id>{{ shop.url }}/collections/{{ product.vendor | handleize | downcase }}{{ product.url }}</id>
+  <published>{{ product.published_at | date: "%Y-%m-%dT%H:%M:%S+11:00" }}</published>
+  <updated>{{ product.published_at | date: "%Y-%m-%dT%H:%M:%S+11:00" }}</updated>
+  <link rel="alternate" type="text/html" href="{{ shop.url }}/collections/{{ product.vendor | handleize | downcase }}{{ product.url }}"/>
+  <title>{{ product.title | replace: "&", "&amp;"}}</title>
+  <s:type>{{ product.type | url_param_escape }}</s:type>
+  <s:vendor>{{ product.vendor}}</s:vendor>
+  <summary type="html"><![CDATA[{{ product.description}}]]>
+  </summary>
+  {% for tag in product.tags %}<s:tag>{{ tag | replace: "&", "&amp;" }}</s:tag>
+  {% endfor %}{% for variant in product.variants %}<s:variant>
+      <id>{{ shop.url }}/collections/{{ product.vendor | handleize | downcase }}{{ product.url }}</id>
+      <title>{{ variant.option1 }}</title>
+      <s:price currency="AUD">{{ variant.price}}</s:price>
+      <s:sku>{{ variant.sku }}</s:sku>{% if variant.barcode %}
+      <s:gtin>{{ variant.barcode }}</s:gtin>{% endif %}
+      <s:grams>0</s:grams>
+  </s:variant>{% endfor%}
+</entry>
