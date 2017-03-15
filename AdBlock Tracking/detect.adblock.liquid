@@ -1,0 +1,20 @@
+<script src="{{ 'ads.js' | asset_url }}"></script>		
+<script type="text/javascript">
+  window.onload = function(){
+  // Begin detection of element with hash ID from ads.js
+    if(document.getElementById('upBwXaklLFUR')){
+      upBwXaklLFUR='No';
+      console.log('Blocking Ads: No');
+    } else {
+        upBwXaklLFUR='Yes';
+        console.log('Blocking Ads: Yes');
+  } // END Hash Check
+  // Begin Google Analytics Non-Interactive Event  
+    if(typeof ga !=='undefined'){
+      ga('send','event','Blocking Ads',upBwXaklLFUR,{'nonInteraction':1});
+  } else if(typeof _gaq !=='undefined'){
+    _gaq.push(['_trackEvent','Blocking Ads',upBwXaklLFUR,undefined,undefined,true]);
+  } // END GA
+
+} 
+</script>
